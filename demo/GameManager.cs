@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.UnityEngine;
 using System.UnityEngine.SceneManagement;
 
-public class AudioManager: MonoBeahviour
+public class AudioManager: MonoBehaviour
 {
   public static GameManager instance;
   
