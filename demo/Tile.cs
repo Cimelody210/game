@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.UnityEngine;
 using System.UnityEngine.SceneManagement;
 
-public class Tile: MonoBeahviour
+public class Tile: MonoBehaviour
 {
     private void OnMouseOver()
     {
