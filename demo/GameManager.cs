@@ -26,6 +26,23 @@ public class AudioManager: MonoBeahviour
   public Towner towner;
   public LevelUp levelup;
   public PoolManager pool;
+
+  IEnumrator GameWinRoutine()
+  {
+    isLive = false;
+    enemyCleaner.SetActive(true);
+    yield return new WaitForSeconds(0.5f);
+
+    // Thiếu uiResult, Win và Stop
+    uiResult.GameObject.SetActive(true);
+    uiResult.Win();
+    Stop();
+
+    AudioManager.instance.PlayBgm(false);
+    AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+
+    
+  }
   
   void Awake()
   {
@@ -45,17 +62,29 @@ public class AudioManager: MonoBeahviour
   {
     
   }
-  
-  void Update()
+  public void GetExp()
+  {
+    if(!isLive)
+      return;
+    gameTime += Time.deltaTime;
+    exp++;
+    if (exp == nextExp[Mathf.Min(level, nextExp, nextExp.length - 1)])
+    {
+      level++;
+      exp = 0;
+      uiLevelUp.Show();
+    }
+  }
+  private void Update()
   {
     
-  }
-  
-  public void ()
-  {
-    if(!PauseMenuScript.isPaused)
-    {
-      if(active)
+    if(!isLive)
+      return;
+    gameTime += Time.deltaTime;
+    
+    if(gameTime > maxGameTime){
+      gameTime  = maxGameTime;
+      GameWin();
     }
   }
 }
