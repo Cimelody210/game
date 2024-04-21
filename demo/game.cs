@@ -13,7 +13,9 @@ public class MainMenu: MonoBehaviour
     public Toddler hard;
     public Toddler easy;
     public Toddler medium;
-    public void Play(){
+
+    public void Play()
+    {
         SceneManager.LoadScene("MyGame");
     }
     public void Exitime(){
