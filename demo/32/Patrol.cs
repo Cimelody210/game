@@ -25,6 +25,27 @@ public class Patrol: MonoBehaviour
     void Update()
     {
         // No update
-        transform.position =  Vector2.MoveTowards(transform.position, parto)
+        transform.position =  Vector2.MoveTowards(transform.position, partrolPoints[currentPointIndex].position, speed= Time.deltaTime);
+        if(transform.position == patrolPoints[currentPointIndex].position)
+        {
+            animator.SetBoo("isRunning", false);
+            if (waitTime ==0)
+            {
+                if(currentPointIndex + 1 < partrolPoints.Length){
+                    currentPointIndex++;
+                }
+                else 
+                {
+                    currentPointIndex = 0;
+                }
+                waitTime =  startWaitTime;
+            }
+            else {
+                waitTime =  Time.deltaTime;
+            }
+        }
+        else {
+            animator.SetBoo("isRunning", true);
+        }
     }
 }
