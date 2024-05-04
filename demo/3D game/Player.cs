@@ -18,6 +18,11 @@ namespace Player: Monobehaviour
     private Button btn_ready;
     private Button btn_mainMenu;
     public float MAX_PLAYER_AMOUNT =3f;
+    
+    public WanderState wander = new WanderState();
+    public AttackState Attk = new AttackState();
+    public static List<GameObject> pickups =  new List<GameObject>();
+    public static List<GameObject> critter =  new List<GameObject>();
 
     private KitchenGameMultiplayer Instance {get; private set;}
     public event EventHandler onTryingTojoinGame;
@@ -62,6 +67,78 @@ namespace Player: Monobehaviour
         playerPaused  = new Dictionary<ulong, bool>();
         
 
+    }
+    public partial clas ItemSoures: SingletonScripttableObject{
+        [field: SerializeField]
+        public ItemType[] item { get; private set;}
+        [Serializable]
+        public class ItemType{
+            public int ID;
+            public ItemInfo item_info;
+        }
+    }
+    [RequireComponent(typeof(TMP_Text))]
+
+    public void LoadBank(string bankName, bool loadSample){
+        RuntimeManager.LoadBank(bankName, loadSample);
+    }
+    public void PlayOneShotAttacked(EventReference eb, Vector3 postion){
+        RuntimeManager.PlayOneShotAttacked(bankNameb, postion);
+
+    }
+
+    // Singleton
+    public static class Singleton
+    {
+        #region Funciton
+        public static T Get<T>(bool findObjectofType =  true, bool dontDestroyOnLoad = false) where T: MonoBehaviour
+        {
+            if(findObjectofType && SingletonInstance<T>.instance == null){
+                TrySet(Object.findObjectofType<T>(), dontDestroyOnLoad);
+                LogManager.Log($"Called Get {typeof(T)}> ( before  istane was set: clling {typeof(T)})")
+            }
+            return SingletonInstance<T>.instance;
+        }
+        public static bool TrySet<t>(T instance, bool dontDestroyOnLoad = false) where T: MonoBehaviour
+        {
+            if(SingletonInstance<T>.instance != null)
+            {
+                LogManager.Log($"{instance.name} called set<{typeof(T)}> when ");
+                if(!IsSingleton(instance)){
+                    LogManager.Log(" There are two different singleton instance ");
+                    Object.Destroy(instance.gameObject);
+                }
+                return false;
+            }
+            else if(instance != null){
+                SingletonInstance<T>.instance  = instance;
+                if(dontDestroyOnLoad)
+                    Object.DontDestroyOnLoad(instance.gameObject);
+                return true;
+            }
+            else {
+                LogManager.Log("dhdhehg cjd")
+                return false;
+            }
+        }
+        public static bool IsSingleton(T instance) where T: MonoBehaviour
+        {
+            return ReferenceEquals(SingletonInstance<T>.instance, instance);
+        }
+        #endregion
+        #region Subclasses
+        private static class SingletonInstance<T> where T: MonoBehaviour{
+            public static T instance;
+        }
+        #endregion
+    }
+    public interface ExampleSingletonInteface{
+        void LogSingleton();
+    }
+    public class ISingleton: Singleton, ExampleSingletonInteface{
+        public void LogSingleton(){
+            Debug.Log("iSjf jj");
+        }
     }
 
     public bool TryGetPlate(out PlateKitchenObject palte)
