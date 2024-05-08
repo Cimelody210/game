@@ -99,6 +99,21 @@ namespace Player: Monobehaviour
             }
             return SingletonInstance<T>.instance;
         }
+
+        public void InitAniamtion()
+        {
+            viewPintSizeY = GetViewportRect().Size.y;
+            spawnY = viewPintSizeY / 2.0f + 16f;
+
+            Animation anim = GetNode<Animation>("FlyInAnim").GetAnimation("FlyIn");
+            anim.TrackSetKeyValue(0,0,new Vector2(0,-viewPintSizeY/2.0f+10f));
+            anim.TrackSetKeyValue(0,1,new Vector2(0,(-viewPintSizeY/2.0f)+ viewPintSizeY/3.0f));
+            player.Position = new Vector2(0, viewPintSizeY/2.0f - 10f);
+
+            GetNode<Sprite>("sjdhfhf").Position = new Vector2(0,0);
+
+            anim = GetNode<AnimationPlayer>("djhdh").GetAnimation("suu");
+        }
         public static bool TrySet<t>(T instance, bool dontDestroyOnLoad = false) where T: MonoBehaviour
         {
             if(SingletonInstance<T>.instance != null)
