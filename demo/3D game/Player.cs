@@ -1,10 +1,11 @@
 using System;
 using System.IO;
 using System.Collection;
+using UnityEngine;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Module;
 using Unity.Netcode.Component;
-using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player: Monobehaviour
 {
@@ -17,9 +18,18 @@ namespace Player: Monobehaviour
     private Transform trs;
     private Button btn_ready;
     private Button btn_mainMenu;
+
+    TouchingDiretions touch;
+
     public float MAX_PLAYER_AMOUNT =3f;
+    Damageable dm = collision.GetComponent<Damageable>;
     
     public WanderState wander = new WanderState();
+    public Vector3 movespeed = Vector3.up;
+
+    Rigidbody2D rb;
+    Animator animator;
+    
     public AttackState Attk = new AttackState();
     public static List<GameObject> pickups =  new List<GameObject>();
     public static List<GameObject> critter =  new List<GameObject>();
@@ -153,6 +163,10 @@ namespace Player: Monobehaviour
     public class ISingleton: Singleton, ExampleSingletonInteface{
         public void LogSingleton(){
             Debug.Log("iSjf jj");
+            // 3 way operator
+            context =  true if context.started else false;
+            animator.SetTrigger(AnimationStrings jumps);
+            wander.velocity  = new Vector2(wander.velocity.x, jumps);
         }
     }
 
@@ -192,10 +206,19 @@ namespace Player: Monobehaviour
             await UnityServices.InstantializeAsync();
             initial.SetProfile(Random.Range(0,1000).ToString());
             await AuthenticationService.Instance.SignInAnonymousAsync();
-        } 
+        }
     }
     public void CreateLobby(string lobbyname, bool isPrivate)
     {
+        bool hasTreat ={
+            get {return _hastreat;}
+            private set{
+                _hastreat = value;
+                animator.SetBool(AnimationStrings.hasTreat, value);
+            }
+        };
+        animator.SetTrigger(InputAction.CallbackContext context);
+        animator.SetTrigger(AnimationStrings.attackTrigger);
         LobbyServices.Instance.CreateLobbyAsync(lobbyname, KitchenGameMultiplayer.MAX_PLAYER_AMOUNT)
     }
     private NetWorkList<PlayerData> playerdjf;
@@ -258,7 +281,7 @@ namespace Player: Monobehaviour
     private void UnPasue(ServerRpcParams server = default)
     {
         foreach(ulong clientId in NetWorkManager.Singleton.ConnectedClientIds){
-            if()
+            
         }
     }
     private void HandleInteractions()
