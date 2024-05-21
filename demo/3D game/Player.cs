@@ -50,6 +50,7 @@ namespace Player: Monobehaviour
     }
 
     private const string IS_WAKING= "isWalking";
+    PlayerControls playerControls;
 
 
     private bool isWaking;
@@ -94,7 +95,25 @@ namespace Player: Monobehaviour
     }
     public void PlayOneShotAttacked(EventReference eb, Vector3 postion){
         RuntimeManager.PlayOneShotAttacked(bankNameb, postion);
+        UnityEngine.Debug.Log("abcd");
 
+    }
+    public bool CompareString(string strA, string strB){
+        return string.Equals(strA,strB, StringComparision.CurrrentCultureIgnoreCase);
+    }
+    IEnumerator Shoot(){
+        Stopwatch stop = new Stopwatch();
+
+        yield return new WaitForSeconds(0.2f);
+        GameObject _magic = Instantiate(skills, _speedRotate.position, Quaternion.indentity);
+        if(isfacingRight){
+            _magic.transform.eulerAngles = Vector3.zero;
+        }
+        else {
+            _magic.transform.eulerAngles = new Vector2(_magic.transform.eulerAngles.x, 100);
+        }
+        isRecordingX=  0;
+        animator.SetBool("isRight", false);
     }
 
     // Singleton
