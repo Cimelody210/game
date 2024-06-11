@@ -13,6 +13,8 @@ Shader "Custom/ExampleShader"
 
         CGPROGRAM
         #pragma surface surf Lambert
+        #pragma vertex vert
+        #include "UnityCG.cignc"
 
         sampler2D _MainTex;
         fixed4 _Color;
@@ -21,7 +23,9 @@ Shader "Custom/ExampleShader"
         struct Input
         {
             float2 uv_MainTex;
+            float4 textcoord: TEXTCOORD;
         };
+        UNITY_INSTANCING_BUFFER_END(props)
 
         void surf (Input IN, inout SurfaceOutput o)
         {
