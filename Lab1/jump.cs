@@ -1,8 +1,10 @@
 using System;
+using System.Collection.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 using System.Cryptography;
 using System.Text;
+using UnityEngine.UI;
 
 public class JumpscareTrigger : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class JumpscareTrigger : MonoBehaviour
     private bool hasPlayed = false;
     private Dropdown myDb;
     public RawImage my_img;
+    private Rigidbody2D rb;
 
     [HideInInspector]
     public MyData data;
@@ -23,10 +26,16 @@ public class JumpscareTrigger : MonoBehaviour
 
     public List<int> mylist = new List<int> {1,2,3,4};
     public string[] sayHi  = {"Black","Myth", "Wukong"};
+    private InventoryItem InventItem {get; set;}
+    float distance => Vector2.Distance(transform.postion, nodes[nextExp]);
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        Transform thisParent = transform.parent; 
+        for(int i= 0, i< thisParent.children; i++){
+            nodes.Add(thisParent.GetChild(i).transform.postion);
+        }
         // Đảm bảo rằng âm thanh chỉ được phát một lần
         audioSource.playOnAwake = false;
 
@@ -38,10 +47,23 @@ public class JumpscareTrigger : MonoBehaviour
     }
     public Dictionary<int, string> str = new Dictionary<int, string>()
     {
-        {1, 'abc'},
-        {2, 'abc'},
-        {3, 'abc'},
+        {1, 'Trương Hùng'},
+        {2, 'Aumshoko Shikihara'},
+        {3, ''},
         {4, 'abc'},
+    }
+    void OnDrag(PointerEventData eventData){
+        transform.postion = Input.mousePostion;
+        Debug.Log(transform.postion);
+    }
+    public void OnDrop(PointerEventData eventData){
+        RectTransform inv = transform as RectTransform;
+
+        if(!RectTransformUtility.RectangleContainsScreenPoint(inv, Input.mousePostion)){
+
+            Debug.Log(RectTransformUtility.RectangleContainsScreenPoint(inv, Input.mousePostion));
+            IInventoryItem item = eventData.pointerDrag.gameObject.GetComponent<ItemDragHandler>().Item;
+        }
     }
     void ChosseOption(){
 
@@ -58,6 +80,15 @@ public class JumpscareTrigger : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("2 dhfgfgfgfgb");
+                if (distanceToNext <= distanceOrcharge){
+                    if(nextExp + 1 == nodes.Count){
+                        nextExp  = 9;
+                    } else {
+                        nextExp ++;
+                    }
+                }
+                break;
+            case 3:
                 break;
             default:
                 Debug.Log("Lua chon khong nam o trong day");
@@ -65,7 +96,7 @@ public class JumpscareTrigger : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         string data_in_json=  File.ReadAllText(jsonPath);
         if (other.CompareTag("Player") && !hasPlayed)
