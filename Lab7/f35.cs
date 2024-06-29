@@ -124,7 +124,7 @@ class F35: IDataDevice
             new Weapon("GAU-22A", "Left-hand-side", 3, 2),
             new Weapon("AIM-9X Block II", "Coordinate", 1, 4),
             new Weapon("AIM-120C ASSRAM", "Coordinate", 1, 6)
-        }
+        };
 
     }
     private void DetermineTargetPosition()
