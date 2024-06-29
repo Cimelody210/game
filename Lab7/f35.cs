@@ -27,14 +27,36 @@ class ControlStation : IDataDevice
         return data;
     }
 }
+public class Weapon
+{
+    public string Name { get; set; }
+    public string Location { get; set; }
+    public int Priority { get; set; }
+    public int Quantity { get; set; }  // Số lượng (lượng vũ)
+    // public Weapon TargetWeapon { get; set; } // Vũ khí của mục tiêu
+
+    // Constructor
+    public Target(string name, string location, int priority, int quantity)
+    {
+        Name = name;
+        Location = location;
+        Priority = priority;
+        Quantity = quantity;
+    }
+}
 class Target
 {
+    public string Name {get; set;}
+    public string Nation {get; set;}
     public float X { get; private set; }
     public float Y { get; private set; }
     public float Z { get; private set; }
 
-    public Target(float x, float y, float z)
+    public Target(string name, string quocgia, float x, float y, float z)
     {
+        // Tọa độ x,y,z của chúng nó trên bản đồ để xác định, rồi ship vài cái tủ lạnh
+        Name = name;
+        Nation = quocgia;
         X = x;
         Y = y;
         Z = z;
@@ -54,6 +76,8 @@ class Target
 class F35: IDataDevice
 {
     private Target target;
+    private Weapon weapon;
+
     private bool evasiveManeuverEnabled;
 
     public F35(Target target)
@@ -94,15 +118,35 @@ class F35: IDataDevice
         evasiveManeuverEnabled = false;
         Console.WriteLine("Evasive maneuver disabled.");
     }
+    private void ListWeapon(){
+        List<Weapon> vukhi = new List<Weapon>{
+
+            new Weapon("GAU-22A", "Left-hand-side", 3, 2),
+            new Weapon("AIM-9X Block II", "Coordinate", 1, 4),
+            new Weapon("AIM-120C ASSRAM", "Coordinate", 1, 6)
+        }
+
+    }
     private void DetermineTargetPosition()
     {
-        // Giả lập xác định vị trí mục tiêu
-        target = new Target(10.0f, 5.0f, -20.0f); // Giả định mục tiêu nằm ở vị trí (10, 5, -20) trong không gian 3D
+        muctieu_j20  = new Target("QBZ-191","Russia", 4.3f, 5.5f, -100.5f);
+        muctieu_su27 = new Target("SU-27", "Russia", 10.0f, -20.4f, 7.0f);
+        muctieu_su35 = new Target("su35", "Russia", 1.2f, -40.0f, 53.0f);
+        muctieu_j16 = new Target("16g","China", 1.4f, 8.0f, 34.0f);
+        louis = new Target("Louis Pham","Cali", 18.4f, 68.0f, 3.0f);
+        haley_fr = new Target("Nguyen Minh Trang","Cali", 165.4f, 89.0f, 434.0f);
+
+        List<Target> targets = new List<Target>
+        {
+            muctieu_j16,
+            muctieu_j20,
+            muctieu_su27,
+            muctieu_su35,
+            louis,
+            haley_fr
+        };
+        
         // Có thể thêm hàng loạt mục tiêu ở đây
-        muctieu_j20  = new Target(4.3f, 5.5f, -100.5f);
-        muctieu_su27 = new Target(10.0f, -20.4f, 7.0f);
-        muctieu_su35 = new Target(1.2f, -40.0f, 53.0f);
-        muctieu_j16 = new Target(1.4f, 8.0f, 34.0f);
     }
     public void RunTR3()
     {
