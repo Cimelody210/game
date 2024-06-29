@@ -45,16 +45,47 @@ public class JumpscareTrigger : MonoBehaviour
         Debug.Log(mathf.Max(-10f, 20f));
         Debug.Log(mathf.Min(-10f, 10f));
     }
-    public Dictionary<int, string> str = new Dictionary<int, string>()
+    private Dictionary<int, string> levelBackgrounds;
+    public Dictionary<int, string> level = new Dictionary<int, string>()
     {
-        {1, 'Trương Hùng'},
-        {2, 'Aumshoko Shikihara'},
-        {3, ''},
-        {4, 'abc'},
+        {1, 'Six Ear Maccaque'},
+        {2, 'Lu Bo Dynatis'},
+        {3, 'Ma Vien'},
+        {4, 'Ngot Luong Hop Thai'},
+        {5, 'Zhu Nan'},
+        {6, 'Zhu ZhongShi'},
+        {7, 'Ton Si Nghi'},
+       
     }
     void OnDrag(PointerEventData eventData){
         transform.postion = Input.mousePostion;
         Debug.Log(transform.postion);
+    }
+    void LoadBackground(int level)
+    {
+        // Kiểm tra xem level có tồn tại trong dictionary levelBackgrounds không
+        if (levelBackgrounds.ContainsKey(level))
+        {
+            // Tên của hình nền tương ứng với level
+            string backgroundName = levelBackgrounds[level];
+            
+            // Load hình nền từ Resources/Backgrounds
+            Sprite backgroundSprite = Resources.Load<Sprite>($"Backgrounds/{backgroundName}");
+
+            // Kiểm tra xem đã load thành công hình nền hay chưa
+            if (backgroundSprite != null)
+            {
+                // Set hình nền cho SpriteRenderer
+                backgroundSpriteRenderer.sprite = backgroundSprite;
+            }
+            else
+            {
+                Debug.LogError($"Failed to load background sprite: {backgroundName}");
+            }
+        } else{
+            Debug.LogError($"No background defined for level: {level}");
+
+        }
     }
     public void OnDrop(PointerEventData eventData){
         RectTransform inv = transform as RectTransform;
@@ -69,17 +100,38 @@ public class JumpscareTrigger : MonoBehaviour
 
         Application.OpenURL("linkwebste");
         GetWindow<SampleScript>("Sample");
+
+        // Gán enemy cụ thể và bắt đầu chiến đấu với nó
+        GameObject specificEnemy = null;
+        // Lấy danh sách enemy của level từ dictionary
+        List<string> enemies = levels[level];
+
+        public SpriteRenderer backgroundSpriteRenderer; // SpriteRenderer của hình nền
+
+        
         int LuaChon = 10;
         switch(LuaChon)
         {
             case 0:
                 Debug.Log("May dang cho man 1");
                 break;
+            // Solo với khỉ 6 tai Lục Nhĩ và quan quân nhà Đương thời Lý Thế Dân
             case 1:
+                specificEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/LinhCatBT"));
+                playerCharacter.transform.position = new Vector3(0, 0, 0);
+                specificEnemy.transform.position = new Vector3(10, 0, 0);    // Vị trí của enemy
+                // specificEnemy.GetComponent<EnemyController>().StartBattle(); 
+
+                // Gọi phương thức StartGame trong script của nhân vật + Gán nhân vật vào vị trí chiến đấu, bắt đầu animation, v.v.
+                playerCharacter.GetComponent<PlayerController>().StartGame();
+
+
                 Debug.Log("1 dhfgfgfgfgb");
                 break;
+            // Solo với Lữ Bố và các tướng Tam quốc
             case 2:
                 Debug.Log("2 dhfgfgfgfgb");
+                specificEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/TaoKham"));
                 if (distanceToNext <= distanceOrcharge){
                     if(nextExp + 1 == nodes.Count){
                         nextExp  = 9;
@@ -88,10 +140,47 @@ public class JumpscareTrigger : MonoBehaviour
                     }
                 }
                 break;
+            // Solo với Lữ Bố và các tướng thời thập quốc TQ
             case 3:
+                specificEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/AnLocSon"));
+                break;
+            // Solo với Lữ Bố và quân  Mông Cổ
+            case 4:
+                specificEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/LuBo"));
+                break;
+            // Solo với đám Minh thời Chu Đệ -> Chu Chiêm Cơ
+            case 5:
+                Debug.Log("Đang bắt đầu cuộc chiến với " + string(enemy) + "của Cẩm y vệ");
+                foreach (Transform child in enemyListContainer)
+                {
+                    Destroy(child.gameObject);
+                }
+
+                // Hiển thị từng enemy dưới dạng button
+                foreach (string enemy in enemies)
+                {
+                    GameObject buttonGO = Instantiate(enemyButtonPrefab, enemyListContainer);
+                    Button button = buttonGO.GetComponent<Button>();
+                    button.GetComponentInChildren<Text>().text = enemy;
+                    button.onClick.AddListener(() => StartBattle(enemy)); // Thêm listener cho button
+                }
+                
+                modalPanel.SetActive(false);
+                break;
+            // Cũng là Minh triều nhưng là đánh nhau với đám Đông-Tây xưởng, Cẩm Y vệ
+            case 6:
+                break;
+            // Đánh nhau với quân Mãn Thanh
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
                 break;
             default:
-                Debug.Log("Lua chon khong nam o trong day");
+                Debug.LogError($"Unknown enemy type: {enemy}");
                 break;
         }
     }
