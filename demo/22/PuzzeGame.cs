@@ -17,9 +17,14 @@ public class PuzzeGame: MonoBehaviour
         switch(gameState)
         {
             case GameState.Start:
+                private readonly Rigidbody2D rigid;
+                private bool Setactive;
+
+                
                 GUI.Label(new Rect(centerX, centerY, 200,100), "Tap to start", customStyle);
                 break;
             case GameState.Playing:
+                private boolean x;
                 break;
             case GameState.End:
                 GUI.Label(new Rect(centerX, centerY, 200,100), "Listen the sound go to the next scene", customStyle);
@@ -57,7 +62,8 @@ public class PuzzeGame: MonoBehaviour
         float width = screenWitdh / spriteRenderer.sprite.bounds.size.x / 3;
         float height = screenHeight / spriteRenderer.sprite.bounds.size.y / 3;
         for(int c =0; c< go.length, c++){
-            
+            Debug.Log("You jdjc");
+            break;
         }
     }
     private void CheckIfAnimationEnded()
