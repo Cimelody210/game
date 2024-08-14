@@ -1,0 +1,7 @@
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\obj\Debug\Lab03_Bai02_TuKhoaThis.csproj.AssemblyReference.cache
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\obj\Debug\Lab03_Bai02_TuKhoaThis.csproj.CoreCompileInputs.cache
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\bin\Debug\Lab03_Bai02_TuKhoaThis.exe.config
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\bin\Debug\Lab03_Bai02_TuKhoaThis.exe
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\bin\Debug\Lab03_Bai02_TuKhoaThis.pdb
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\obj\Debug\Lab03_Bai02_TuKhoaThis.exe
+D:\2015614\Lab03_Bai02_TuKhoaThis\Lab03_Bai02_TuKhoaThis\obj\Debug\Lab03_Bai02_TuKhoaThis.pdb

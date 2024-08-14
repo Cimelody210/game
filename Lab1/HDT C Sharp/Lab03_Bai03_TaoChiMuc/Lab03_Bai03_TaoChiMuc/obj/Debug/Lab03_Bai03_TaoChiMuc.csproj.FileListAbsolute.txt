@@ -1,0 +1,7 @@
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\bin\Debug\Lab03_Bai03_TaoChiMuc.exe.config
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\bin\Debug\Lab03_Bai03_TaoChiMuc.exe
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\bin\Debug\Lab03_Bai03_TaoChiMuc.pdb
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\obj\Debug\Lab03_Bai03_TaoChiMuc.csproj.AssemblyReference.cache
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\obj\Debug\Lab03_Bai03_TaoChiMuc.csproj.CoreCompileInputs.cache
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\obj\Debug\Lab03_Bai03_TaoChiMuc.exe
+D:\2015614\Lab03_Bai03_TaoChiMuc\Lab03_Bai03_TaoChiMuc\obj\Debug\Lab03_Bai03_TaoChiMuc.pdb
