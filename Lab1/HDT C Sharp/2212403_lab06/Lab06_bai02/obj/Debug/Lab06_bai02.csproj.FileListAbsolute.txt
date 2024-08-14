@@ -1,0 +1,7 @@
+D:\2212403_lab06\Lab06_bai02\obj\Debug\Lab06_bai02.csproj.AssemblyReference.cache
+D:\2212403_lab06\Lab06_bai02\obj\Debug\Lab06_bai02.csproj.CoreCompileInputs.cache
+D:\2212403_lab06\Lab06_bai02\bin\Debug\Lab06_bai02.exe.config
+D:\2212403_lab06\Lab06_bai02\bin\Debug\Lab06_bai02.exe
+D:\2212403_lab06\Lab06_bai02\bin\Debug\Lab06_bai02.pdb
+D:\2212403_lab06\Lab06_bai02\obj\Debug\Lab06_bai02.exe
+D:\2212403_lab06\Lab06_bai02\obj\Debug\Lab06_bai02.pdb
