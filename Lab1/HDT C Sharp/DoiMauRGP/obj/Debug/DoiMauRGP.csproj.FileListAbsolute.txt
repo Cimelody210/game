@@ -1,0 +1,10 @@
+D:\DoiMauRGP\bin\Debug\DoiMauRGP.exe.config
+D:\DoiMauRGP\bin\Debug\DoiMauRGP.exe
+D:\DoiMauRGP\bin\Debug\DoiMauRGP.pdb
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.csproj.AssemblyReference.cache
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.Form1.resources
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.Properties.Resources.resources
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.csproj.GenerateResource.cache
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.csproj.CoreCompileInputs.cache
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.exe
+D:\DoiMauRGP\obj\Debug\DoiMauRGP.pdb
