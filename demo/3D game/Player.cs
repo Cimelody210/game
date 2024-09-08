@@ -18,6 +18,7 @@ namespace Player: Monobehaviour
     private Transform trs;
     private Button btn_ready;
     private Button btn_mainMenu;
+    yield return new WaitForSeconds(dashDistance);
 
     TouchingDiretions touch;
 
@@ -57,7 +58,6 @@ namespace Player: Monobehaviour
     private Vector3 lastInteractor;
     private BaseCounter selectedCounter;
     private GameObject kitchenobject;
-    
     List<PrimitiveType> primitivetype = new ()
     {
         PrimitiveType.Cube,
@@ -171,6 +171,9 @@ namespace Player: Monobehaviour
         }
         #endregion
         #region Subclasses
+        public bool ISGrounded(){
+            return Physics2D.OverLapCircle(highScore * _chieuCaom, 0.2f, velocity.y);
+        }
         private static class SingletonInstance<T> where T: MonoBehaviour{
             public static T instance;
         }
